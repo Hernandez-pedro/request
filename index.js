@@ -1,11 +1,13 @@
 const express = require ('express')
 const app = express()
 
+app.use(express.json())
+
 // http://localhost:3000/hernandez/123
 app.get('/:user/:password', (req, res) =>{ //Endponit
     const {user, password} = req.params
     if (user == 'hernandez' && password == '123'){
-        res.json({msg:'inicio seccion exitoso'})
+        res.json({msg:'inicio sesion exitoso'})
         return
     }
     res. json({msg:'fallo contraseña invalida'})
@@ -21,7 +23,16 @@ app.get('/login', (req,res) => {
         res.json(404).json({msg:'wrong user or password'})
     
 }})
-
+///02/10/2023 ////  //usos de seccion con postman desde enviar datos y modificar datos///
+app.post('/login' , (req,res) => {
+    const  {user, password}= req.body
+    if (user == 'hernandez' && password == '123'){
+        res.json({msg:'inicio sesion exitoso'})
+        return
+    }
+    res. json({msg:'fallo contraseña invalida'})
+    
+})
 
 app.put('/', (request, response) =>{
     response.json({msg:'Hola PUT'})
